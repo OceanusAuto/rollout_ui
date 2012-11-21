@@ -35,7 +35,21 @@ module RolloutUi
       ids.each { |id| rollout.activate_user(name, User.new(id)) unless id.to_s.empty? }
     end
 
-  private
+    def list
+      redis.smembers(:features)
+    end
+
+    def create
+      redis.sadd(:features,@name)
+    end
+
+    def remove
+      redis.srem(:features,@name)
+    end
+
+
+
+    private
 
     def redis
       @wrapper.redis

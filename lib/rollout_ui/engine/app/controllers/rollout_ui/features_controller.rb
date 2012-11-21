@@ -1,9 +1,25 @@
 module RolloutUi
   class FeaturesController < RolloutUi::ApplicationController
-    before_filter :wrapper, :only => [:index]
+    before_filter :wrapper, :only => [:index, :new]
 
     def index
       @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) }
+    end
+    
+    def new
+      @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) }
+    end
+
+    def create
+      feature = RolloutUi::Feature.new(params[:feature_id])
+      feature.create         
+      redirect_to features_path
+    end
+    
+    def delete
+      feature = RolloutUi::Feature.new(params[:feature_id])
+      feature.remove       
+      redirect_to features_path
     end
 
     def update
@@ -15,6 +31,15 @@ module RolloutUi
 
       redirect_to features_path
     end
+    
+    def redirect_to(options = {}, response_status = {})
+      if request.xhr?
+        render(:update) {|page| page.redirect_to(options)}
+      else
+        super(options, response_status)
+      end
+    end
+
 
   private
 

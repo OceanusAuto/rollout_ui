@@ -1,0 +1,16 @@
+<%= form_tag({:action => 'delete', :method => :post}, :class => "input_form") do  %>
+	Remove feature:
+	<select class="feature_combo" name="feature_id" >
+	  <% @features.each do |feature| %>
+	    <option id="<%= feature.name %>"><%= feature.name %></option>
+	  <% end %>
+	</select>
+    <input type="submit" value="Remove" />
+<% end %>
+
+<%= form_tag({:action => 'create', :method => :post}, :class => "input_form") do %>
+	Add new feature: <input type="text" name="feature_id">
+    <input type="submit" value="Add" />
+<% end %>
+
+<%= link_to 'Go back', features_path %>

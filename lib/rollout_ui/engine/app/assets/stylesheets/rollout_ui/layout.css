@@ -8,6 +8,10 @@ h1 img {
   height: 75px;
 }
 
+a:link, a:visited {
+  color: rgb(252, 195, 52);
+}
+
 /* For modern browsers */
 .clearfix:before,
 .clearfix:after {
@@ -105,4 +109,13 @@ h1 img {
   text-align: center;
   color: #f4b71d;
   text-shadow: 0 -1px 2px rgba(0,0,0,1);
+}
+
+.feature_combo {
+	width: 235px;
+}
+
+.input_form {
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
