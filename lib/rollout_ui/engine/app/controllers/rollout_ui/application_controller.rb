@@ -5,7 +5,6 @@ module RolloutUi
     def check_admins
       admins =  REDIS_CONFIG[Rails.env][:admins]
       redirect_to '/access-denied' if (current_user.nil? or !admins.include?(current_user.login))
-      #head :unauthorized
     end
 
   end
