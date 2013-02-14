@@ -1,9 +1,15 @@
 module RolloutUi
   class FeaturesController < RolloutUi::ApplicationController
-    before_filter :wrapper, :only => [:index, :new]
+    before_filter :wrapper, :only => [:index, :new, :notifications]
 
     def index
-      @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) }
+      @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) unless feature.include?(D360Core::NotificationsAccess::NAMESPACE)}.compact
+    end
+
+    def notifications
+      @rollout_heading = "Dealer360 Notification Access TTR"
+      @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) if feature.include?(D360Core::NotificationsAccess::NAMESPACE)}.compact
+      render :index
     end
     
     def new
