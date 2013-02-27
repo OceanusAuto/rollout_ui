@@ -7,7 +7,7 @@ module RolloutUi
     end
 
     def notifications
-      @rollout_heading = "Dealer360 Notification Access TTR"
+      @rollout_heading = "Dealer360 Notification Feature Gates"
       @features = @wrapper.features.map{ |feature| RolloutUi::Feature.new(feature) if feature.include?(D360Core::NotificationsAccess::NAMESPACE)}.compact
       render :index
     end
