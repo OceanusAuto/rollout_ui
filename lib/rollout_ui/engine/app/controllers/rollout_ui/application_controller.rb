@@ -3,8 +3,7 @@ module RolloutUi
     before_filter :check_admins
 
     def check_admins
-      admins =  REDIS_CONFIG[Rails.env][:admins]
-      redirect_to '/access-denied' if (current_user.nil? or !admins.include?(current_user.login))
+      redirect_to '/access-denied' if (current_user.blank? || !current_user.can_access_admin_pages?)
     end
 
   end
